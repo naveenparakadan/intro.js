@@ -963,9 +963,16 @@
         widthHeightPadding = 0;
       }
 
+      var elementHeight = elementPosition.height;
+
+      if (currentElement.alignToTop) {
+        var viewportHeight = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
+        elementHeight = elementHeight + elementPosition.top > viewportHeight ? viewportHeight - elementPosition.top : elementHeight;
+      }
+
       //set new position to helper layer
       helperLayer.style.cssText = 'width: ' + (elementPosition.width  + widthHeightPadding)  + 'px; ' +
-                                        'height:' + (elementPosition.height + widthHeightPadding)  + 'px; ' +
+                                        'height:' + (elementHeight + widthHeightPadding)  + 'px; ' +
                                         'top:'    + (elementPosition.top    - widthHeightPadding / 2)   + 'px;' +
                                         'left: '  + (elementPosition.left   - widthHeightPadding / 2)   + 'px;';
 
